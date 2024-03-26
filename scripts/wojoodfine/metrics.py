@@ -61,7 +61,7 @@ class TagVocab:
         return vocabs
     
 
-def conll_to_segments(filename, tags_start_col=1):
+def conll_to_segments(filename):
     """
     Convert CoNLL files to segments. This return list of segments and each segment is
     a list of tuples (token, tag)
@@ -77,7 +77,7 @@ def conll_to_segments(filename, tags_start_col=1):
                 segment = list()
             else:
                 parts = token.split()
-                token = Token(text=parts[0], gold_tag=parts[tags_start_col:])
+                token = Token(text=parts[0], gold_tag=parts[1:])
                 segment.append(token)
 
         segments.append(segment)
@@ -91,7 +91,7 @@ def compute_nested_metrics(segments):
     :param segments: List[List[arabiner.data.dataset.Token]] - list of segments
     :return: metrics - SimpleNamespace - F1/micro/macro/weights, recall, precision, accuracy
     """
-    vocabs = TagVocab().get_itos()
+    vocabs = TagVocab().get_itos()[1:]
     y, y_hat = list(), list()
 
     # We duplicate the dataset N times, where N is the number of entity types
@@ -99,7 +99,7 @@ def compute_nested_metrics(segments):
     # Example: first copy, will create pairs of ground truth and predicted labels for entity type GPE
     #          another copy will create pairs for LOC, etc.
     for i, vocab in enumerate(vocabs):
-        vocab_tags = [tag for tag in vocab if "-" in tag]
+        vocab_tags = ["^" + tag + "$" for tag in vocab if "-" in tag]
         r = re.compile("|".join(vocab_tags))
 
         y += [[(list(filter(r.match, token.gold_tag)) or ["O"])[0] for token in segment] for segment in segments]
@@ -139,10 +139,9 @@ def compute_single_label_metrics(segments):
 
 
 if __name__ == "__main__":
-    print("Testing")
     vocabs = TagVocab().get_itos()
-    truth_segments = conll_to_segments("test.txt", tags_start_col=1)
-    pred_segments = conll_to_segments("predictions.txt", tags_start_col=2)
+    truth_segments = conll_to_segments("test.txt")
+    pred_segments = conll_to_segments("predictions.txt")
 
     # Our Github repo saves predictions pipe (|) separated and adds a header
     # So, we will check if the format is proper ConLL format or not and transform
@@ -154,7 +153,7 @@ if __name__ == "__main__":
 
     # Count number of columns in the gold_tag attribute, if it is 2, then 
     # it is likely it is pipe separated, then tranform the data
-    if len(pred_segments[0][0].gold_tag) == 1:
+    if "|" in pred_segments[0][0].gold_tag[0]:
         for segment in pred_segments:
             for token in segment:
                 tags = token.gold_tag[0].split("|")
@@ -180,6 +179,7 @@ if __name__ == "__main__":
         # Are the number of tokens in each segment equal
         #truth_tokens = [t.text for t in truth_segment]
         #pred_tokens = [t.text for t in pred_segment]
+
         assert len(truth_segment) == len(pred_segment), "Number of tokens in truth and pedicted segment mismatch at line {}".format(line)
 
         # Validate the token pair in ground truth and predicted  
@@ -198,7 +198,7 @@ if __name__ == "__main__":
         line += 1
 
     if nested:
-        # Compute nested NER metrics  
+        # Compute nested NER metrics 
         metrics = compute_nested_metrics(truth_segments)
     else:
         # Compute flat NER metrics

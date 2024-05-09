@@ -165,7 +165,7 @@ if __name__ == "__main__":
             assert tt.text == pt.text, "mismatch in tokens at line {} ({} != {})".format(line, tt.text, pt.text)
 
             # Does each token in the predictions has the correct number of tags?
-            assert len(pt.gold_tag) == len(vocabs), "mismatch in number of tags at line {}, expected {}. found {}".format(line, len(vocabs) - 1, len(pt.gold_tag))
+            assert len(pt.gold_tag) == len(vocabs), "mismatch in number of tags at line {}, expected {}. found {}".format(line, len(vocabs), len(pt.gold_tag))
 
             tt.pred_tag = [{"tag": t} for t in pt.gold_tag]
 

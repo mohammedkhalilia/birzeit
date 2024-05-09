@@ -52,15 +52,10 @@ class TagVocab:
     def get_itos(self):
         vocabs = list()
 
-        if isinstance(self.vocab, dict):
-            vocab = {idx: tag for tag, idx in self.vocab.items()}
+        for v in self.vocab:
+            vocab = {int(k): v for k, v in v.items()}
             vocab = dict(sorted(vocab.items()))
             vocabs.append(list(vocab.values()))
-        else:
-            for v in self.vocab:
-                vocab = {int(k): v for k, v in v.items()}
-                vocab = dict(sorted(vocab.items()))
-                vocabs.append(list(vocab.values()))
 
         return vocabs
     
@@ -121,9 +116,9 @@ def compute_metrics(segments, vocabs):
 
 
 if __name__ == "__main__":
-    nested_index_filename = "/Users/mkhalilia/src/github/birzeit/scripts/wojoodfine/vocab-flat.json"
-    truth_segments = conll_to_segments("/Users/mkhalilia/src/github/birzeit/scripts/wojoodfine/test-flat.txt")
-    pred_segments = conll_to_segments("/Users/mkhalilia/src/github/birzeit/scripts/wojoodfine/predictions-flat.txt")
+    nested_index_filename = "/Users/mkhalilia/src/github/birzeit/scripts/wojoodfine/vocab-nested.json"
+    truth_segments = conll_to_segments("/Users/mkhalilia/src/github/birzeit/scripts/wojoodfine/test-nested.txt")
+    pred_segments = conll_to_segments("/Users/mkhalilia/src/github/birzeit/scripts/wojoodfine/predictions-nested.txt")
     
     vocabs = TagVocab(nested_index_filename).get_itos()[1:]
     

@@ -1,0 +1,421 @@
+[
+    {
+        "0": "O",
+        "1": "B-CARDINAL",
+        "2": "B-ORG",
+        "3": "B-GOV",
+        "4": "I-ORG",
+        "5": "I-GOV",
+        "6": "B-DATE",
+        "7": "B-LANGUAGE",
+        "8": "B-NORP",
+        "9": "B-PERS",
+        "10": "I-PERS",
+        "11": "B-OCC",
+        "12": "I-DATE",
+        "13": "B-GPE",
+        "14": "B-COUNTRY",
+        "15": "B-EVENT",
+        "16": "I-EVENT",
+        "17": "I-OCC",
+        "18": "I-CARDINAL",
+        "19": "B-FAC",
+        "20": "B-BUILDING-OR-GROUNDS",
+        "21": "I-FAC",
+        "22": "I-BUILDING-OR-GROUNDS",
+        "23": "B-TOWN",
+        "24": "B-LOC",
+        "25": "B-CONTINENT",
+        "26": "B-MONEY",
+        "27": "I-MONEY",
+        "28": "B-ORDINAL",
+        "29": "I-LANGUAGE",
+        "30": "B-EDU",
+        "31": "I-EDU",
+        "32": "B-TIME",
+        "33": "I-TIME",
+        "34": "B-SPO",
+        "35": "I-SPO",
+        "36": "B-SPORT",
+        "37": "I-GPE",
+        "38": "I-SPORT",
+        "39": "B-LAND-REGION-NATURAL",
+        "40": "I-LOC",
+        "41": "I-LAND-REGION-NATURAL",
+        "42": "I-NORP",
+        "43": "I-COUNTRY",
+        "44": "I-TOWN",
+        "45": "B-CLUSTER",
+        "46": "I-CLUSTER",
+        "47": "B-QUANTITY",
+        "48": "B-NONGOV",
+        "49": "B-STATE-OR-PROVINCE",
+        "50": "I-NONGOV",
+        "51": "B-NEIGHBORHOOD",
+        "52": "I-NEIGHBORHOOD",
+        "53": "I-STATE-OR-PROVINCE",
+        "54": "B-PERCENT",
+        "55": "I-PERCENT",
+        "56": "B-WATER-BODY",
+        "57": "I-WATER-BODY",
+        "58": "B-CAMP",
+        "59": "I-CAMP",
+        "60": "B-UNIT",
+        "61": "I-QUANTITY",
+        "62": "B-PATH",
+        "63": "I-PATH",
+        "64": "B-MED",
+        "65": "I-MED",
+        "66": "B-REGION-GENERAL",
+        "67": "I-REGION-GENERAL",
+        "68": "B-CURR",
+        "69": "B-GPE_ORG",
+        "70": "B-WEBSITE",
+        "71": "B-COM",
+        "72": "I-COM",
+        "73": "I-GPE_ORG",
+        "74": "I-ORDINAL",
+        "75": "B-CELESTIAL",
+        "76": "B-SUBAREA-FACILITY",
+        "77": "I-SUBAREA-FACILITY",
+        "78": "B-SCI",
+        "79": "I-SCI",
+        "80": "B-REL",
+        "81": "I-REL",
+        "82": "B-ORG_FAC",
+        "83": "I-ORG_FAC",
+        "84": "B-REGION-INTERNATIONAL",
+        "85": "I-REGION-INTERNATIONAL",
+        "86": "B-ENT",
+        "87": "B-BOUNDARY",
+        "88": "I-BOUNDARY",
+        "89": "B-PLANT",
+        "90": "I-PLANT",
+        "91": "B-LAW",
+        "92": "I-LAW",
+        "93": "I-WEBSITE",
+        "94": "I-CURR",
+        "95": "B-PRODUCT",
+        "96": "I-PRODUCT",
+        "97": "B-GPE-ORG",
+        "98": "I-GPE-ORG",
+        "99": "B-AIRPORT",
+        "100": "I-AIRPORT",
+        "101": "I-CONTINENT",
+        "102": "I-ENT",
+        "103": "I-CELESTIAL"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-AIRPORT",
+        "2": "I-AIRPORT",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-BOUNDARY",
+        "2": "I-BOUNDARY",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-BUILDING-OR-GROUNDS",
+        "2": "I-BUILDING-OR-GROUNDS",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-CAMP",
+        "2": "I-CAMP",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-CARDINAL",
+        "2": "I-CARDINAL",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-CELESTIAL",
+        "2": "I-CELESTIAL",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-CLUSTER",
+        "2": "I-CLUSTER",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-COM",
+        "2": "I-COM",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-CONTINENT",
+        "2": "I-CONTINENT",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-COUNTRY",
+        "2": "I-COUNTRY",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-CURR",
+        "2": "I-CURR",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-DATE",
+        "2": "I-DATE",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-EDU",
+        "2": "I-EDU",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-ENT",
+        "2": "I-ENT",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-EVENT",
+        "2": "I-EVENT",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-FAC",
+        "2": "I-FAC",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-GOV",
+        "2": "I-GOV",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-GPE",
+        "2": "I-GPE",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-GPE-ORG",
+        "2": "I-GPE-ORG",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-GPE_ORG",
+        "2": "I-GPE_ORG",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-LAND-REGION-NATURAL",
+        "2": "I-LAND-REGION-NATURAL",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-LANGUAGE",
+        "2": "I-LANGUAGE",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-LAW",
+        "2": "I-LAW",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-LOC",
+        "2": "I-LOC",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-MED",
+        "2": "I-MED",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-MONEY",
+        "2": "I-MONEY",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-NEIGHBORHOOD",
+        "2": "I-NEIGHBORHOOD",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-NONGOV",
+        "2": "I-NONGOV",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-NORP",
+        "2": "I-NORP",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-OCC",
+        "2": "I-OCC",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-ORDINAL",
+        "2": "I-ORDINAL",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-ORG",
+        "2": "I-ORG",
+        "3": "B-GPE-ORG",
+        "4": "I-GPE-ORG",
+        "5": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-ORG_FAC",
+        "2": "I-ORG_FAC",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-PATH",
+        "2": "I-PATH",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-PERCENT",
+        "2": "I-PERCENT",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-PERS",
+        "2": "I-PERS",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-PLANT",
+        "2": "I-PLANT",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-PRODUCT",
+        "2": "I-PRODUCT",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-QUANTITY",
+        "2": "I-QUANTITY",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-REGION-GENERAL",
+        "2": "I-REGION-GENERAL",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-REGION-INTERNATIONAL",
+        "2": "I-REGION-INTERNATIONAL",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-REL",
+        "2": "I-REL",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-SCI",
+        "2": "I-SCI",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-SPO",
+        "2": "I-SPO",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-SPORT",
+        "2": "I-SPORT",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-STATE-OR-PROVINCE",
+        "2": "I-STATE-OR-PROVINCE",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-SUBAREA-FACILITY",
+        "2": "I-SUBAREA-FACILITY",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-TIME",
+        "2": "I-TIME",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-TOWN",
+        "2": "I-TOWN",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-UNIT",
+        "2": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-WATER-BODY",
+        "2": "I-WATER-BODY",
+        "3": "O"
+    },
+    {
+        "0": "<pad>",
+        "1": "B-WEBSITE",
+        "2": "I-WEBSITE",
+        "3": "O"
+    }
+]

@@ -43,9 +43,8 @@ class Token:
     
 
 class TagVocab:
-    def __init__(self):
+    def __init__(self, nested_index_filename):
         self.vocab = None
-        nested_index_filename = "IdToTag-nested.json"
 
         with open(nested_index_filename, "r") as fh:
             self.vocab = json.load(fh)
@@ -53,10 +52,15 @@ class TagVocab:
     def get_itos(self):
         vocabs = list()
 
-        for v in self.vocab:
-            vocab = {int(k): v for k, v in v.items()}
+        if isinstance(self.vocab, dict):
+            vocab = {idx: tag for tag, idx in self.vocab.items()}
             vocab = dict(sorted(vocab.items()))
             vocabs.append(list(vocab.values()))
+        else:
+            for v in self.vocab:
+                vocab = {int(k): v for k, v in v.items()}
+                vocab = dict(sorted(vocab.items()))
+                vocabs.append(list(vocab.values()))
 
         return vocabs
     
@@ -85,13 +89,12 @@ def conll_to_segments(filename):
     return segments
 
 
-def compute_nested_metrics(segments):
+def compute_metrics(segments, vocabs):
     """
     Compute metrics for nested NER
     :param segments: List[List[arabiner.data.dataset.Token]] - list of segments
     :return: metrics - SimpleNamespace - F1/micro/macro/weights, recall, precision, accuracy
     """
-    vocabs = TagVocab().get_itos()[1:]
     y, y_hat = list(), list()
 
     # We duplicate the dataset N times, where N is the number of entity types
@@ -117,32 +120,13 @@ def compute_nested_metrics(segments):
     return SimpleNamespace(**metrics)
 
 
-def compute_single_label_metrics(segments):
-    """
-    Compute metrics for flat NER
-    :param segments: List[List[arabiner.data.dataset.Token]] - list of segments
-    :return: metrics - SimpleNamespace - F1/micro/macro/weights, recall, precision, accuracy
-    """
-    y = [[token.gold_tag[0] for token in segment] for segment in segments]
-    y_hat = [[token.pred_tag[0]["tag"] for token in segment] for segment in segments]
-
-    metrics = {
-        "micro_f1": f1_score(y, y_hat, average="micro", scheme=IOB2),
-        "macro_f1": f1_score(y, y_hat, average="macro", scheme=IOB2),
-        "weights_f1": f1_score(y, y_hat, average="weighted", scheme=IOB2),
-        "precision": precision_score(y, y_hat, scheme=IOB2),
-        "recall": recall_score(y, y_hat, scheme=IOB2),
-        "accuracy": accuracy_score(y, y_hat),
-    }
-
-    return SimpleNamespace(**metrics)
-
-
 if __name__ == "__main__":
-    vocabs = TagVocab().get_itos()
-    truth_segments = conll_to_segments("test.txt")
-    pred_segments = conll_to_segments("predictions.txt")
-
+    nested_index_filename = "/Users/mkhalilia/src/github/birzeit/scripts/wojoodfine/vocab-flat.json"
+    truth_segments = conll_to_segments("/Users/mkhalilia/src/github/birzeit/scripts/wojoodfine/test-flat.txt")
+    pred_segments = conll_to_segments("/Users/mkhalilia/src/github/birzeit/scripts/wojoodfine/predictions-flat.txt")
+    
+    vocabs = TagVocab(nested_index_filename).get_itos()[1:]
+    
     # Our Github repo saves predictions pipe (|) separated and adds a header
     # So, we will check if the format is proper ConLL format or not and transform
     # it if needed, if the first line starts with "Token", then there is a header
@@ -152,7 +136,7 @@ if __name__ == "__main__":
         truth_segments[0].pop(0)
 
     # Count number of columns in the gold_tag attribute, if it is 2, then 
-    # it is likely it is pipe separated, then tranform the data
+    # it is likely pipe separated, then tranform the data
     if "|" in pred_segments[0][0].gold_tag[0]:
         for segment in pred_segments:
             for token in segment:
@@ -165,9 +149,6 @@ if __name__ == "__main__":
     # and inaccurate results
 
     # We need to valiadate the user input and make sure it matches the ground truth data
-
-    # First, is this nested or flat NER, we can tell from the number of tags in the first token of the first segment
-    nested = True if len(pred_segments[0][0].gold_tag) > 1 else False
     line = 1
 
     # Second, make sure the number of segments match between ghround truth and predicted file
@@ -189,22 +170,15 @@ if __name__ == "__main__":
             assert tt.text == pt.text, "mismatch in tokens at line {} ({} != {})".format(line, tt.text, pt.text)
 
             # Does each token in the predictions has the correct number of tags?
-            assert ((len(pt.gold_tag) == len(vocabs) - 1) and nested) or (len(pt.gold_tag) == 1 and not nested), "mismatch in number of tags at line {}".format(line)
+            assert len(pt.gold_tag) == len(vocabs), "mismatch in number of tags at line {}, expected {}. found {}".format(line, len(vocabs) - 1, len(pt.gold_tag))
 
-            tt.pred_tag = [{"tag": t} for t in pt.gold_tag] 
+            tt.pred_tag = [{"tag": t} for t in pt.gold_tag]
 
             line += 1
 
         line += 1
 
-    if nested:
-        # Compute nested NER metrics 
-        metrics = compute_nested_metrics(truth_segments)
-    else:
-        # Compute flat NER metrics
-        metrics = compute_single_label_metrics(truth_segments)
-            
-
+    metrics = compute_metrics(truth_segments, vocabs)
     print(json.dumps(metrics.__dict__, indent=4))
      
 
